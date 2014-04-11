@@ -1,0 +1,31 @@
+{
+  "name": "linkage",
+  "version": "0.0.1",
+  "description": "Do raw requests to LinkedIn REST API using OAuth2 access tokens",
+  "main": "index.js",
+  "scripts": {
+    "test": "./node_modules/.bin/nodeunit test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/irnc/linkage.git"
+  },
+  "keywords": [
+    "linkedin",
+    "oauth2",
+    "request"
+  ],
+  "author": "Pavel Zubkou <pavel.zubkou@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/irnc/linkage/issues"
+  },
+  "homepage": "https://github.com/irnc/linkage",
+  "dependencies": {
+    "request": "^2.34.0"
+  },
+  "devDependencies": {
+    "nock": "^0.27.3",
+    "nodeunit": "^0.8.6"
+  }
+}
