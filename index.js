@@ -27,7 +27,9 @@ function linkage (accessToken) {
         // POST to Start Following Company responds with 201 on success, and
         // with 500 when user is already following the company.
         if (response.statusCode >= 400) {
-          return callback(new linkage.LinkedInError(body.message), body);
+          err = linkage.LinkedInError.createFromResponseBody(body);
+
+          return callback(err, body);
         }
 
         callback(null, body);
@@ -41,8 +43,31 @@ linkage.LinkedInError = function (message) {
 
   this.name = 'LinkedInError';
   this.message = message;
+  this.body = {};
 };
 
 util.inherits(linkage.LinkedInError, Error);
+
+/**
+ *
+ * @param {Object|String} body JSON string or already parsed object
+ * @returns {linkage.LinkedInError}
+ */
+linkage.LinkedInError.createFromResponseBody = function (body) {
+  body = typeof body === 'object' ? body : JSON.parse(body);
+
+  // Errors from API v1 endpoints contain `message`, while errors from UAS use
+  // `error` and `error_description` properties.
+  var message = body.message || body.error;
+  var err = new linkage.LinkedInError(message);
+
+  err.setBody(body);
+
+  return err;
+};
+
+linkage.LinkedInError.prototype.setBody = function (body) {
+  this.body = body;
+};
 
 module.exports = linkage;
