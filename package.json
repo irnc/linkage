@@ -1,6 +1,6 @@
 {
   "name": "linkage",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Do raw requests to LinkedIn REST API using OAuth2 access tokens",
   "main": "index.js",
   "scripts": {
